@@ -49,7 +49,7 @@ bool HelloWorld::init()
         return false;
     }
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
@@ -103,7 +103,8 @@ bool HelloWorld::init()
 
 	sprite = Sprite::create("neko.png");
 	this->addChild(sprite);
-	sprite->setPosition(Vec2(500, 500));
+	sprite->setPosition(Vec2(1280-100, 720-100));
+	sprite->setScale(0.25f);
 	//sprite->setColor(Color3B(0x00, 0xff, 0xff));
 	//sprite->setOpacity(0x00);
 
@@ -129,9 +130,11 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
+
 	Vec2 pos = sprite->getPosition();
 
-	pos += Vec2(1.0f, 1.0f);
+	// •Ï‰»—Ê    X     Y
+	pos += Vec2(-5.0f, 0.0f);
 
 	sprite->setPosition(pos);
 }
