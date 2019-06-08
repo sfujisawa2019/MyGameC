@@ -39,7 +39,7 @@ static void problemLoading(const char* filename)
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
-// on "init" you need to initialize your instance
+// ‰Šú‰»
 bool HelloWorld::init()
 {
     //////////////////////////////
@@ -106,10 +106,13 @@ bool HelloWorld::init()
 	sprite->setPosition(Vec2(1280-100, 720-100));
 	sprite->setScale(0.25f);
 	//sprite->setColor(Color3B(0x00, 0xff, 0xff));
-	//sprite->setOpacity(0x00);
+	// Š®‘S•s“§–¾
+	sprite->setOpacity(255);
 
 	// update‚ğ—LŒø‰»‚·‚é
 	this->scheduleUpdate();
+
+	counter = 0;
 
     return true;
 }
@@ -132,9 +135,18 @@ void HelloWorld::update(float delta)
 {
 
 	Vec2 pos = sprite->getPosition();
-
 	// •Ï‰»—Ê    X     Y
-	pos += Vec2(-5.0f, 0.0f);
-
+	//pos += Vec2(-5.0f, 0.0f);
+	pos.x -= 1.0f;
 	sprite->setPosition(pos);
+
+	// ‚¾‚ñ‚¾‚ñ“§–¾‚É‚·‚éˆ—
+	// 5•b = 300 frm
+	counter++;
+	float opacity = 255 - (counter / 300.0f * 255.0f);
+	if (opacity < 0)
+	{
+		opacity = 0.0f;
+	}
+	sprite->setOpacity(opacity);
 }
