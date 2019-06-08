@@ -101,8 +101,14 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
-	Sprite *sprite = Sprite::create("neko.png");
+	sprite = Sprite::create("neko.png");
 	this->addChild(sprite);
+	sprite->setPosition(Vec2(500, 500));
+	//sprite->setColor(Color3B(0x00, 0xff, 0xff));
+	//sprite->setOpacity(0x00);
+
+	// update‚ð—LŒø‰»‚·‚é
+	this->scheduleUpdate();
 
     return true;
 }
@@ -119,4 +125,13 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
 
 
+}
+
+void HelloWorld::update(float delta)
+{
+	Vec2 pos = sprite->getPosition();
+
+	pos += Vec2(1.0f, 1.0f);
+
+	sprite->setPosition(pos);
 }
