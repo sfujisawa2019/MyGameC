@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
@@ -39,7 +39,7 @@ static void problemLoading(const char* filename)
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
-// ������
+// 初期化
 bool HelloWorld::init()
 {
     //////////////////////////////
@@ -106,13 +106,15 @@ bool HelloWorld::init()
 	sprite->setPosition(Vec2(1280-100, 720-100));
 	sprite->setScale(0.25f);
 	//sprite->setColor(Color3B(0x00, 0xff, 0xff));
-	// ���S�s����
+	// 完全不透明
 	sprite->setOpacity(255);
 
-	// update��L��������
+	// updateを有効化する
 	this->scheduleUpdate();
 
 	counter = 0;
+
+	state = 0;
 
     return true;
 }
@@ -133,20 +135,48 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
+	Vec2 pos;
 
-	Vec2 pos = sprite->getPosition();
-	// �ω���    X     Y
-	//pos += Vec2(-5.0f, 0.0f);
-	pos.x -= 1.0f;
-	sprite->setPosition(pos);
-
-	// ���񂾂񓧖��ɂ��鏈��
-	// 5�b = 300 frm
-	counter++;
-	float opacity = 255 - (counter / 300.0f * 255.0f);
-	if (opacity < 0)
+	switch (state)
 	{
-		opacity = 0.0f;
+	case 0:
+		// 左移動
+		pos = sprite->getPosition();
+		pos += Vec2(-5.0f, 0.0f);
+		sprite->setPosition(pos);
+		// 左端に達したら
+		if (pos.x <= 100)
+		{
+			state = 1; // 下移動に切り替える
+		}
+		break;
+	case 1:
+		// 下移動
+		pos = sprite->getPosition();
+		pos += Vec2(0.0f, -5.0f);
+		sprite->setPosition(pos);
+		// 下端に達したら
+		if (pos.y <= 100)
+		{
+			state = 2; // 右移動に切り替える
+		}
+		break;
+	case 2:
+		// 右移動
+		break;
+	default:
+		// 上移動
+		break;
 	}
-	sprite->setOpacity(opacity);
+	
+
+	// だんだん透明にする処理
+	// 5秒 = 300 frm
+	//counter++;
+	//float opacity = 255 - (counter / 300.0f * 255.0f);
+	//if (opacity < 0)
+	//{
+	//	opacity = 0.0f;
+	//}
+	//sprite->setOpacity(opacity);
 }
