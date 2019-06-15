@@ -101,16 +101,31 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
-	sprite = Sprite::create("neko.png");
+	sprite = Sprite::create("sample09.png");
 	this->addChild(sprite);
-	sprite->setPosition(Vec2(1280-100, 720-100));
-	sprite->setScale(0.25f);
-	//sprite->setColor(Color3B(0x00, 0xff, 0xff));
+	sprite->setPosition(Vec2(visibleSize.width/2.0f, visibleSize.height/2.0f));
+	//sprite->setScale(0.25f);
 	// 完全不透明
 	sprite->setOpacity(255);
 
+	// 画像の左下が(0,0)
+	// 画像の右上が(1,0)の座標系で
+	// 基準点を指定する
+	sprite->setAnchorPoint(Vec2(1.0f, 0.0f));
+
+	//sprite->setRotation(45.0f);
+
+	//                       R  G  B
+	//sprite->setColor(Color3B(0, 0, 255));
+
+	// 左右反転
+	//sprite->setFlippedX(true);
+
+	//                      開始X  Y  　W   H
+	sprite->setTextureRect(Rect(0, 32, 32, 32));
+
 	// updateを有効化する
-	this->scheduleUpdate();
+	//this->scheduleUpdate();
 
 	counter = 0;
 
