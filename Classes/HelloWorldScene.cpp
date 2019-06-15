@@ -131,6 +131,8 @@ bool HelloWorld::init()
 
 	rot = 0;
 
+	blue = 0;
+
     return true;
 }
 
@@ -150,6 +152,16 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
-	rot += 1.0f;
-	sprite->setRotation(rot);
+	// 180フレームかけて255になる
+	blue += 255.0f / 180.0f;
+	// 最大値を超えないように制限する
+	if (blue > 255.0f)
+	{
+		blue = 255.0f;
+	}
+	// 赤と青の数値が逆の動き
+	sprite->setColor(Color3B(255-blue, 0, blue));
+
+	//rot += 1.0f;
+	//sprite->setRotation(rot);
 }
