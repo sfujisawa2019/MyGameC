@@ -48,6 +48,8 @@ public:
 	int counter;
 	// どちらに移動中なのか 0:左 1:下 2:右 3:上
 	int state;
+
+	float rot;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -104,16 +104,14 @@ bool HelloWorld::init()
 	sprite = Sprite::create("sample09.png");
 	this->addChild(sprite);
 	sprite->setPosition(Vec2(visibleSize.width/2.0f, visibleSize.height/2.0f));
-	//sprite->setScale(0.25f);
+	sprite->setScale(2.0f);
 	// 完全不透明
-	sprite->setOpacity(255);
+	//sprite->setOpacity(255);
 
 	// 画像の左下が(0,0)
 	// 画像の右上が(1,0)の座標系で
 	// 基準点を指定する
-	sprite->setAnchorPoint(Vec2(1.0f, 0.0f));
-
-	//sprite->setRotation(45.0f);
+	sprite->setAnchorPoint(Vec2(0.0f, 1.0f));
 
 	//                       R  G  B
 	//sprite->setColor(Color3B(0, 0, 255));
@@ -122,14 +120,16 @@ bool HelloWorld::init()
 	//sprite->setFlippedX(true);
 
 	//                      開始X  Y  　W   H
-	sprite->setTextureRect(Rect(0, 32, 32, 32));
+	//sprite->setTextureRect(Rect(0, 32, 32, 32));
 
 	// updateを有効化する
-	//this->scheduleUpdate();
+	this->scheduleUpdate();
 
 	counter = 0;
 
 	state = 0;
+
+	rot = 0;
 
     return true;
 }
@@ -150,48 +150,6 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
-	Vec2 pos;
-
-	switch (state)
-	{
-	case 0:
-		// 左移動
-		pos = sprite->getPosition();
-		pos += Vec2(-5.0f, 0.0f);
-		sprite->setPosition(pos);
-		// 左端に達したら
-		if (pos.x <= 100)
-		{
-			state = 1; // 下移動に切り替える
-		}
-		break;
-	case 1:
-		// 下移動
-		pos = sprite->getPosition();
-		pos += Vec2(0.0f, -5.0f);
-		sprite->setPosition(pos);
-		// 下端に達したら
-		if (pos.y <= 100)
-		{
-			state = 2; // 右移動に切り替える
-		}
-		break;
-	case 2:
-		// 右移動
-		break;
-	default:
-		// 上移動
-		break;
-	}
-	
-
-	// だんだん透明にする処理
-	// 5秒 = 300 frm
-	//counter++;
-	//float opacity = 255 - (counter / 300.0f * 255.0f);
-	//if (opacity < 0)
-	//{
-	//	opacity = 0.0f;
-	//}
-	//sprite->setOpacity(opacity);
+	rot += 1.0f;
+	sprite->setRotation(rot);
 }
