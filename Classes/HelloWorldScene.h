@@ -43,6 +43,7 @@ public:
     CREATE_FUNC(HelloWorld);
 
 	cocos2d::Sprite* sprite;
+	cocos2d::Sprite* sprite2;
 
 	// 実行からのカウント
 	int counter;
@@ -52,6 +53,9 @@ public:
 	float rot;
 
 	float blue;
+
+	// 不透明度
+	float opacity;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
