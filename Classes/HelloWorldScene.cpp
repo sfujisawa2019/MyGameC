@@ -101,6 +101,10 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
+	// 乱数の初期化
+	//Random r = new Random();
+	srand(time(nullptr));
+
 	for (int i = 0; i < 5; i++)
 	{
 		sprite[i] = Sprite::create("neko.png");
@@ -108,7 +112,13 @@ bool HelloWorld::init()
 		sprite[i]->setPosition(Vec2(100*i, visibleSize.height / 2.0f));
 		sprite[i]->setScale(0.1f);
 
-		MoveBy* action1 = MoveBy::create(2.0f, Vec2(300, 300));
+		float mx, my;
+
+		// -300～+300の乱数
+		mx = (float)rand()/ RAND_MAX * 600 -300;
+		my = (float)rand()/ RAND_MAX * 600 -300;
+
+		MoveBy* action1 = MoveBy::create(2.0f, Vec2(mx, my));
 		sprite[i]->runAction(action1);
 	}
 
