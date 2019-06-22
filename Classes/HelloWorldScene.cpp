@@ -101,6 +101,16 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
+	for (int i = 0; i < 5; i++)
+	{
+		sprite[i] = Sprite::create("neko.png");
+		this->addChild(sprite[i]);
+		sprite[i]->setPosition(Vec2(100*i, visibleSize.height / 2.0f));
+		sprite[i]->setScale(0.1f);
+
+		MoveBy* action1 = MoveBy::create(2.0f, Vec2(300, 300));
+		sprite[i]->runAction(action1);
+	}
 
 	////////////////////sprite
 	//sprite = Sprite::create("neko.png");
