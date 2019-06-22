@@ -104,7 +104,21 @@ bool HelloWorld::init()
 	sprite = Sprite::create("neko.png");
 	this->addChild(sprite);
 	sprite->setPosition(Vec2(visibleSize.width/2.0f, visibleSize.height/2.0f));
-	//sprite->setScale(2.0f);
+	sprite->setScale(0.1f);
+
+	MoveBy* action1 = MoveBy::create(2.0f, Vec2(300, 300));
+	EaseBounceInOut* action2 = EaseBounceInOut::create(action1);
+	sprite->runAction(action2);
+	//ScaleTo* action1 = ScaleTo::create(1.0f, 5.0f);
+	//JumpTo* action1 = JumpTo::create(1.5f, Vec2(200, 100), 500.0f, 2);
+	//sprite->setOpacity(0);
+	//FadeIn* action1 = FadeIn::create(1.0f);
+	//ccBezierConfig conf;
+	//conf.controlPoint_1 = Vec2(500, 500);
+	//conf.controlPoint_2 = Vec2(500, 100);
+	//conf.endPosition = Vec2(200, 100);
+	//BezierTo* action1 = BezierTo::create(3.0f, conf);
+
 	// 完全不透明
 	//sprite->setOpacity(255);
 
@@ -122,23 +136,14 @@ bool HelloWorld::init()
 	//                      開始X  Y  　W   H
 	//sprite->setTextureRect(Rect(0, 32, 32, 32));
 
-	sprite2 = Sprite::create("lion.jpg");
-	this->addChild(sprite2);
-	sprite2->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
-	sprite2->setScale(2.0f);
+	//sprite2 = Sprite::create("lion.jpg");
+	//this->addChild(sprite2);
+	//sprite2->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+	//sprite2->setScale(2.0f);
 
 	// updateを有効化する
 	this->scheduleUpdate();
 
-	counter = 0;
-
-	state = 0;
-
-	rot = 0;
-
-	blue = 0;
-
-	opacity = 0;
 
     return true;
 }
@@ -159,27 +164,5 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
-	opacity += 1.0f;
-	if (opacity > 255.0f)
-	{
-		opacity = 255.0f;
-	}
 
-	// spriteがフェードアウト
-	sprite->setOpacity(255 - opacity);
-	// sprite2がフェードイン
-	sprite2->setOpacity(opacity);
-
-	//// 180フレームかけて255になる
-	//blue += 255.0f / 180.0f;
-	//// 最大値を超えないように制限する
-	//if (blue > 255.0f)
-	//{
-	//	blue = 255.0f;
-	//}
-	//// 赤と青の数値が逆の動き
-	//sprite->setColor(Color3B(255-blue, 0, blue));
-
-	//rot += 1.0f;
-	//sprite->setRotation(rot);
 }
