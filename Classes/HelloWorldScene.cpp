@@ -101,14 +101,28 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
-	sprite = Sprite::create("neko.png");
-	this->addChild(sprite);
-	sprite->setPosition(Vec2(visibleSize.width/2.0f, visibleSize.height/2.0f));
-	sprite->setScale(0.1f);
+	{
+		//////////////////sprite
+		sprite = Sprite::create("neko.png");
+		this->addChild(sprite);
+		sprite->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+		sprite->setScale(0.1f);
 
-	MoveBy* action1 = MoveBy::create(2.0f, Vec2(300, 300));
-	EaseBounceInOut* action2 = EaseBounceInOut::create(action1);
-	sprite->runAction(action2);
+		MoveBy* action1 = MoveBy::create(2.0f, Vec2(300, 300));
+		EaseBounceInOut* action2 = EaseBounceInOut::create(action1);
+		sprite->runAction(action2);
+	}
+	{
+		//////////////////sprite2
+		sprite2 = Sprite::create("neko.png");
+		this->addChild(sprite2);
+		sprite2->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+		sprite2->setScale(0.1f);
+
+		MoveBy* action1 = MoveBy::create(2.0f, Vec2(-300, -300));
+		EaseBounceInOut* action2 = EaseBounceInOut::create(action1);
+		sprite2->runAction(action2);
+	}
 	//ScaleTo* action1 = ScaleTo::create(1.0f, 5.0f);
 	//JumpTo* action1 = JumpTo::create(1.5f, Vec2(200, 100), 500.0f, 2);
 	//sprite->setOpacity(0);
