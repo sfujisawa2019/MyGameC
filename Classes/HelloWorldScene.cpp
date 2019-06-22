@@ -105,39 +105,43 @@ bool HelloWorld::init()
 	//Random r = new Random();
 	srand(time(nullptr));
 
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	sprite[i] = Sprite::create("neko.png");
-	//	this->addChild(sprite[i]);
-	//	sprite[i]->setPosition(Vec2(100*i, visibleSize.height / 2.0f));
-	//	sprite[i]->setScale(0.1f);
+	for (int i = 0; i < 10; i++)
+	{
+		//float sx, sy;
+		//sx = (float)rand() / RAND_MAX * visibleSize.width;
+		//sy = (float)rand() / RAND_MAX * visibleSize.height;
 
-	//	float mx, my;
+		sprite[i] = Sprite::create("neko.png");
+		this->addChild(sprite[i]);
+		sprite[i]->setPosition(Vec2(100 * i, visibleSize.height/2.0f));
+		//sprite[i]->setPosition(Vec2(sx, sy));
+		sprite[i]->setScale(0.1f);
 
-	//	// -300～+300の乱数
-	//	mx = (float)rand()/ RAND_MAX * 600 -300;
-	//	my = (float)rand()/ RAND_MAX * 600 -300;
+		//float ex, ey;
+		//ex = (float)rand()/ RAND_MAX * visibleSize.width;
+		//ey = (float)rand()/ RAND_MAX * visibleSize.height;
 
-	//	MoveBy* action1 = MoveBy::create(2.0f, Vec2(mx, my));
-	//	sprite[i]->runAction(action1);
-	//}
+		//MoveTo* action1 = MoveTo::create(1.0f, Vec2(ex, ey));
+		JumpBy* action1 = JumpBy::create(1.0f, Vec2(300,0), 300, 1);
+		sprite[i]->runAction(action1);
+	}
 
-	//////////////////sprite
-	sprite = Sprite::create("neko.png");
-	this->addChild(sprite);
-	sprite->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
-	sprite->setScale(0.1f);
+	////////////////////sprite
+	//sprite = Sprite::create("neko.png");
+	//this->addChild(sprite);
+	//sprite->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+	//sprite->setScale(0.1f);
 
-	//////////////////sprite2
-	sprite2 = Sprite::create("lion.jpg");
-	this->addChild(sprite2);
-	sprite2->setPosition(Vec2(300, 300));
-	sprite2->setScale(0.1f);
+	////////////////////sprite2
+	//sprite2 = Sprite::create("lion.jpg");
+	//this->addChild(sprite2);
+	//sprite2->setPosition(Vec2(300, 300));
+	//sprite2->setScale(0.1f);
 
-	//////////////////action1
-	JumpBy* action1 = JumpBy::create(1.0f, Vec2(300, 0), 300, 1);
-	sprite->runAction(action1->clone());
-	sprite2->runAction(action1->clone());
+	////////////////////action1
+	//JumpBy* action1 = JumpBy::create(1.0f, Vec2(300, 0), 300, 1);
+	//sprite->runAction(action1->clone());
+	//sprite2->runAction(action1->clone());
 
 	////JumpBy* action1 = JumpBy::create(2.0f, Vec2(-300, -300), 300,2);
 	////EaseBounceInOut* action2 = EaseBounceInOut::create(action1);
