@@ -106,11 +106,12 @@ bool HelloWorld::init()
 	this->addChild(spr);
 
 	MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
-	ToggleVisibility* action2 = ToggleVisibility::create();
-	JumpBy* action3 = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
+	JumpBy* action2 = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
+	//Hide* action3 = Hide::create();
+	// 自身を削除・解放するアクション（必ず最後に組み込む）
+	RemoveSelf* action3 = RemoveSelf::create();
 	Sequence* action4 = Sequence::create(action1, action2, action3, nullptr);
-	Repeat* action5 = Repeat::create(action4, 6);
-	spr->runAction(action5);
+	spr->runAction(action4);
 	//RepeatForever* action3 = RepeatForever::create(action2);
 	//Repeat* action3 = Repeat::create(action2, 10000);
 
