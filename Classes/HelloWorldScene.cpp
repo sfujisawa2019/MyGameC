@@ -101,30 +101,46 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
+	// Spriteの生成
+	Sprite* spr = Sprite::create("neko.png");
+	this->addChild(spr);
+
+	// MoveToの後に、JumpToとTintToを同時発動させる
+	MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
+
+	JumpTo* action2 = JumpTo::create(1.0f, Vec2(200.0f, 200.0f), 300.0f, 2);
+	TintTo* action3 = TintTo::create(2.0f, Color3B(255, 255, 0));
+	// JumpToとTintToの同時発動
+	Spawn* action4 = Spawn::create(action2, action3, nullptr);
+	// 全部を連携させたAction
+	Sequence* action5 = Sequence::create(action1, action4, nullptr);
+	// 連携アクションを実行
+	spr->runAction(action5);
+
 	// 乱数の初期化
 	//Random r = new Random();
-	srand(time(nullptr));
+	//srand(time(nullptr));
 
-	for (int i = 0; i < 10; i++)
-	{
-		float sx, sy;
-		sx = (float)rand() / RAND_MAX * visibleSize.width;
-		sy = (float)rand() / RAND_MAX * visibleSize.height;
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	float sx, sy;
+	//	sx = (float)rand() / RAND_MAX * visibleSize.width;
+	//	sy = (float)rand() / RAND_MAX * visibleSize.height;
 
-		sprite[i] = Sprite::create("neko.png");
-		this->addChild(sprite[i]);
-		//sprite[i]->setPosition(Vec2(100 * i, visibleSize.height/2.0f));
-		sprite[i]->setPosition(Vec2(sx, sy));
-		sprite[i]->setScale(0.1f);
+	//	sprite[i] = Sprite::create("neko.png");
+	//	this->addChild(sprite[i]);
+	//	//sprite[i]->setPosition(Vec2(100 * i, visibleSize.height/2.0f));
+	//	sprite[i]->setPosition(Vec2(sx, sy));
+	//	sprite[i]->setScale(0.1f);
 
-		float ex, ey;
-		ex = (float)rand()/ RAND_MAX * visibleSize.width;
-		ey = (float)rand()/ RAND_MAX * visibleSize.height;
+	//	float ex, ey;
+	//	ex = (float)rand()/ RAND_MAX * visibleSize.width;
+	//	ey = (float)rand()/ RAND_MAX * visibleSize.height;
 
-		MoveTo* action1 = MoveTo::create(1.0f, Vec2(ex, ey));
-		//JumpBy* action1 = JumpBy::create(1.0f, Vec2(300,0), 300, 1);
-		sprite[i]->runAction(action1);
-	}
+	//	MoveTo* action1 = MoveTo::create(1.0f, Vec2(ex, ey));
+	//	//JumpBy* action1 = JumpBy::create(1.0f, Vec2(300,0), 300, 1);
+	//	sprite[i]->runAction(action1);
+	//}
 
 	////////////////////sprite
 	//sprite = Sprite::create("neko.png");
