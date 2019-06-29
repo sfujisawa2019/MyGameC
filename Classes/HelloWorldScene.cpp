@@ -101,36 +101,21 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
-	// テクスチャの読み込み
-	Texture2D* texture = Director::getInstance()->getTextureCache()->addImage("sample09.png");
+	// Spriteの生成
+	Sprite* spr = Sprite::create("HelloWorld.png");
+	this->addChild(spr);
+	spr->setPosition(Vec2(visibleSize.width -100, visibleSize.height -100));
+	spr->setScale(0.2f);
 
-	// テクスチャからアニメーションパターンを指定する
-	SpriteFrame* frame0 = SpriteFrame::createWithTexture(texture, Rect(32 * 0, 32 * 2, 32, 32));
-	SpriteFrame* frame1 = SpriteFrame::createWithTexture(texture, Rect(32 * 1, 32 * 2, 32, 32));
-	SpriteFrame* frame2 = SpriteFrame::createWithTexture(texture, Rect(32 * 2, 32 * 2, 32, 32));
-	SpriteFrame* frame3 = SpriteFrame::createWithTexture(texture, Rect(32 * 1, 32 * 2, 32, 32));
+	// 移動アクションの生成
+	MoveTo* moveLeft = MoveTo::create(5.0f, Vec2(100, visibleSize.height - 100));
+	MoveTo* moveRight = MoveTo::create(5.0f, Vec2(visibleSize.width - 100, visibleSize.height - 100));
 
-	// 全てのアニメーションパターンをまとめる
-	Vector<SpriteFrame*> animFrames(4);
-	animFrames.pushBack(frame0);
-	animFrames.pushBack(frame1);
-	animFrames.pushBack(frame2);
-	animFrames.pushBack(frame3);
+	// 連続アクションの生成
+	Sequence* seq = Sequence::create(moveLeft, moveRight, nullptr);
 
-	// アニメーションパターンからSpriteを生成
-	Sprite* sprite = Sprite::createWithSpriteFrame(frame0);
-	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	sprite->setScale(10.0f);	// 拡大
-	this->addChild(sprite);
-
-	// 一コマ分の時間を指定してアニメーションデータを生成
-	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.2f);
-	// アニメーションデータからアニメーションアクションを生成
-	Animate* animate = Animate::create(animation);
-	// 指定回数繰り返すアクションを生成
-	Repeat* repeat = Repeat::create(animate, 5);
 	// アクションの実行
-	sprite->runAction(repeat);
+	spr->runAction(seq);
 
 	// updateを有効化する
 	this->scheduleUpdate();
