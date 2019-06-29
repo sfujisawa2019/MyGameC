@@ -105,17 +105,26 @@ bool HelloWorld::init()
 	Sprite* spr = Sprite::create("neko.png");
 	this->addChild(spr);
 
-	// MoveToの後に、JumpToとTintToを同時発動させる
-	MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
-
-	JumpTo* action2 = JumpTo::create(1.0f, Vec2(200.0f, 200.0f), 300.0f, 2);
-	TintTo* action3 = TintTo::create(2.0f, Color3B(255, 255, 0));
-	// JumpToとTintToの同時発動
-	Spawn* action4 = Spawn::create(action2, action3, nullptr);
-	// 全部を連携させたAction
-	Sequence* action5 = Sequence::create(action1, action4, nullptr);
+	JumpTo* action1 = JumpTo::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
+	MoveTo* action2 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
+	// JumpToとMoveToを続けて実行するアクション
+	Sequence* action3 = Sequence::create(action1, action2, nullptr);
+	// 指定アクションを８回繰り返すアクション
+	Repeat* action4 = Repeat::create(action3, 8);
 	// 連携アクションを実行
-	spr->runAction(action5);
+	spr->runAction(action4);
+
+	//// MoveToの後に、JumpToとTintToを同時発動させる
+	//MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
+
+	//JumpTo* action2 = JumpTo::create(1.0f, Vec2(200.0f, 200.0f), 300.0f, 2);
+	//TintTo* action3 = TintTo::create(2.0f, Color3B(255, 255, 0));
+	//// JumpToとTintToの同時発動
+	//Spawn* action4 = Spawn::create(action2, action3, nullptr);
+	//// 全部を連携させたAction
+	//Sequence* action5 = Sequence::create(action1, action4, nullptr);
+	//// 連携アクションを実行
+	//spr->runAction(action5);
 
 	// 乱数の初期化
 	//Random r = new Random();
