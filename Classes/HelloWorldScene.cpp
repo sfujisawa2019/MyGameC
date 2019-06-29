@@ -105,12 +105,17 @@ bool HelloWorld::init()
 	Sprite* spr = Sprite::create("neko.png");
 	this->addChild(spr);
 
-	JumpTo* action1 = JumpTo::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
-	MoveTo* action2 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
+	MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
+
+	JumpBy* action2 = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
+	RepeatForever* action3 = RepeatForever::create(action2);
+	//Repeat* action3 = Repeat::create(action2, 10000);
+
 	// JumpToとMoveToを続けて実行するアクション
-	Sequence* action3 = Sequence::create(action1, action2, nullptr);
-	// 指定アクションを８回繰り返すアクション
-	Repeat* action4 = Repeat::create(action3, 8);
+	// ※失敗例。RepeatFoeverをSequenceに組み込むことはできない。
+	Sequence* action4 = Sequence::create(action1, action3, nullptr);
+	// 指定アクションを無限に繰り返すアクション
+	//Repeat* action4 = Repeat::create(action3, 8);
 	// 連携アクションを実行
 	spr->runAction(action4);
 
