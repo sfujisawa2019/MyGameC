@@ -101,114 +101,36 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
-	// Spriteの生成
-	Sprite* spr = Sprite::create("neko.png");
-	this->addChild(spr);
+	// テクスチャの読み込み
+	Texture2D* texture = Director::getInstance()->getTextureCache()->addImage("sample09.png");
 
-	MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
-	JumpBy* action2 = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
-	//Hide* action3 = Hide::create();
-	// 自身を削除・解放するアクション（必ず最後に組み込む）
-	RemoveSelf* action3 = RemoveSelf::create();
-	Sequence* action4 = Sequence::create(action1, action2, action3, nullptr);
-	spr->runAction(action4);
-	//RepeatForever* action3 = RepeatForever::create(action2);
-	//Repeat* action3 = Repeat::create(action2, 10000);
+	// テクスチャからアニメーションパターンを指定する
+	SpriteFrame* frame0 = SpriteFrame::createWithTexture(texture, Rect(32 * 0, 32 * 2, 32, 32));
+	SpriteFrame* frame1 = SpriteFrame::createWithTexture(texture, Rect(32 * 1, 32 * 2, 32, 32));
+	SpriteFrame* frame2 = SpriteFrame::createWithTexture(texture, Rect(32 * 2, 32 * 2, 32, 32));
+	SpriteFrame* frame3 = SpriteFrame::createWithTexture(texture, Rect(32 * 1, 32 * 2, 32, 32));
 
-	// JumpToとMoveToを続けて実行するアクション
-	// ※失敗例。RepeatFoeverをSequenceに組み込むことはできない。
-	// 指定アクションを無限に繰り返すアクション
-	//Repeat* action4 = Repeat::create(action3, 8);
-	// 連携アクションを実行
+	// 全てのアニメーションパターンをまとめる
+	Vector<SpriteFrame*> animFrames(4);
+	animFrames.pushBack(frame0);
+	animFrames.pushBack(frame1);
+	animFrames.pushBack(frame2);
+	animFrames.pushBack(frame3);
 
-	//// MoveToの後に、JumpToとTintToを同時発動させる
-	//MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
+	// アニメーションパターンからSpriteを生成
+	Sprite* sprite = Sprite::createWithSpriteFrame(frame0);
+	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	sprite->setScale(10.0f);	// 拡大
+	this->addChild(sprite);
 
-	//JumpTo* action2 = JumpTo::create(1.0f, Vec2(200.0f, 200.0f), 300.0f, 2);
-	//TintTo* action3 = TintTo::create(2.0f, Color3B(255, 255, 0));
-	//// JumpToとTintToの同時発動
-	//Spawn* action4 = Spawn::create(action2, action3, nullptr);
-	//// 全部を連携させたAction
-	//Sequence* action5 = Sequence::create(action1, action4, nullptr);
-	//// 連携アクションを実行
-	//spr->runAction(action5);
-
-	// 乱数の初期化
-	//Random r = new Random();
-	//srand(time(nullptr));
-
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	float sx, sy;
-	//	sx = (float)rand() / RAND_MAX * visibleSize.width;
-	//	sy = (float)rand() / RAND_MAX * visibleSize.height;
-
-	//	sprite[i] = Sprite::create("neko.png");
-	//	this->addChild(sprite[i]);
-	//	//sprite[i]->setPosition(Vec2(100 * i, visibleSize.height/2.0f));
-	//	sprite[i]->setPosition(Vec2(sx, sy));
-	//	sprite[i]->setScale(0.1f);
-
-	//	float ex, ey;
-	//	ex = (float)rand()/ RAND_MAX * visibleSize.width;
-	//	ey = (float)rand()/ RAND_MAX * visibleSize.height;
-
-	//	MoveTo* action1 = MoveTo::create(1.0f, Vec2(ex, ey));
-	//	//JumpBy* action1 = JumpBy::create(1.0f, Vec2(300,0), 300, 1);
-	//	sprite[i]->runAction(action1);
-	//}
-
-	////////////////////sprite
-	//sprite = Sprite::create("neko.png");
-	//this->addChild(sprite);
-	//sprite->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
-	//sprite->setScale(0.1f);
-
-	////////////////////sprite2
-	//sprite2 = Sprite::create("lion.jpg");
-	//this->addChild(sprite2);
-	//sprite2->setPosition(Vec2(300, 300));
-	//sprite2->setScale(0.1f);
-
-	////////////////////action1
-	//JumpBy* action1 = JumpBy::create(1.0f, Vec2(300, 0), 300, 1);
-	//sprite->runAction(action1->clone());
-	//sprite2->runAction(action1->clone());
-
-	////JumpBy* action1 = JumpBy::create(2.0f, Vec2(-300, -300), 300,2);
-	////EaseBounceInOut* action2 = EaseBounceInOut::create(action1);
-
-	//ScaleTo* action1 = ScaleTo::create(1.0f, 5.0f);
-	//JumpTo* action1 = JumpTo::create(1.5f, Vec2(200, 100), 500.0f, 2);
-	//sprite->setOpacity(0);
-	//FadeIn* action1 = FadeIn::create(1.0f);
-	//ccBezierConfig conf;
-	//conf.controlPoint_1 = Vec2(500, 500);
-	//conf.controlPoint_2 = Vec2(500, 100);
-	//conf.endPosition = Vec2(200, 100);
-	//BezierTo* action1 = BezierTo::create(3.0f, conf);
-
-	// 完全不透明
-	//sprite->setOpacity(255);
-
-	// 画像の左下が(0,0)
-	// 画像の右上が(1,0)の座標系で
-	// 基準点を指定する
-	//sprite->setAnchorPoint(Vec2(0.0f, 1.0f));
-
-	//                       R  G  B
-	//sprite->setColor(Color3B(0, 0, 255));
-
-	// 左右反転
-	//sprite->setFlippedX(true);
-
-	//                      開始X  Y  　W   H
-	//sprite->setTextureRect(Rect(0, 32, 32, 32));
-
-	//sprite2 = Sprite::create("lion.jpg");
-	//this->addChild(sprite2);
-	//sprite2->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
-	//sprite2->setScale(2.0f);
+	// 一コマ分の時間を指定してアニメーションデータを生成
+	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.2f);
+	// アニメーションデータからアニメーションアクションを生成
+	Animate* animate = Animate::create(animation);
+	// 指定回数繰り返すアクションを生成
+	Repeat* repeat = Repeat::create(animate, 5);
+	// アクションの実行
+	sprite->runAction(repeat);
 
 	// updateを有効化する
 	this->scheduleUpdate();
