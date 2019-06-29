@@ -106,18 +106,19 @@ bool HelloWorld::init()
 	this->addChild(spr);
 
 	MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
-
-	JumpBy* action2 = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
-	RepeatForever* action3 = RepeatForever::create(action2);
+	// 指定秒数待つだけのアクション
+	DelayTime* action2 = DelayTime::create(1.0f);
+	JumpBy* action3 = JumpBy::create(0.5f, Vec2(100.0f, 100.0f),100, 1);
+	Sequence* action4 = Sequence::create(action1, action2, action3, nullptr);
+	spr->runAction(action4);
+	//RepeatForever* action3 = RepeatForever::create(action2);
 	//Repeat* action3 = Repeat::create(action2, 10000);
 
 	// JumpToとMoveToを続けて実行するアクション
 	// ※失敗例。RepeatFoeverをSequenceに組み込むことはできない。
-	Sequence* action4 = Sequence::create(action1, action3, nullptr);
 	// 指定アクションを無限に繰り返すアクション
 	//Repeat* action4 = Repeat::create(action3, 8);
 	// 連携アクションを実行
-	spr->runAction(action4);
 
 	//// MoveToの後に、JumpToとTintToを同時発動させる
 	//MoveTo* action1 = MoveTo::create(2.0f, Vec2(600.0f, 300.0f));
