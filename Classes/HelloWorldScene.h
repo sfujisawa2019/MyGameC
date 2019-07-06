@@ -38,6 +38,8 @@ public:
 
 	// 自作関数
 	void myFunction();
+	// 自作関数
+	void myFunction2(std::string filename);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);

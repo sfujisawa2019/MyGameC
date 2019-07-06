@@ -103,8 +103,10 @@ bool HelloWorld::init()
     }
 
 	// 関数呼び出しアクション
+	//CallFunc* callFunc = CallFunc::create(
+	//	CC_CALLBACK_0(HelloWorld::myFunction, this));
 	CallFunc* callFunc = CallFunc::create(
-		CC_CALLBACK_0(HelloWorld::myFunction, this));
+		CC_CALLBACK_0(HelloWorld::myFunction2, this, "HelloWorld.png"));
 	// 指定秒待機するアクション
 	DelayTime* delay = DelayTime::create(1.0f);
 	// 連続アクション
@@ -162,6 +164,18 @@ void HelloWorld::myFunction()
 	Sprite* spr = Sprite::create("HelloWorld.png");
 	this->addChild(spr);
 	this->setPosition(Vec2(visibleSize.width/2.0f, visibleSize.height/2.0f));
+
+	audioID = experimental::AudioEngine::play2d("test.mp3");
+}
+
+// 自作関数
+void HelloWorld::myFunction2(std::string filename)
+{
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+
+	Sprite* spr = Sprite::create(filename);
+	this->addChild(spr);
+	this->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
 
 	audioID = experimental::AudioEngine::play2d("test.mp3");
 }
