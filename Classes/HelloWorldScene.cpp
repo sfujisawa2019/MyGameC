@@ -105,8 +105,10 @@ bool HelloWorld::init()
 	// 関数呼び出しアクション
 	//CallFunc* callFunc = CallFunc::create(
 	//	CC_CALLBACK_0(HelloWorld::myFunction, this));
+	//CallFunc* callFunc = CallFunc::create(
+	//	CC_CALLBACK_0(HelloWorld::myFunction2, this, "HelloWorld.png"));
 	CallFunc* callFunc = CallFunc::create(
-		CC_CALLBACK_0(HelloWorld::myFunction2, this, "HelloWorld.png"));
+		CC_CALLBACK_0(HelloWorld::myFunction3, this, 5));
 	// 指定秒待機するアクション
 	DelayTime* delay = DelayTime::create(1.0f);
 	// 連続アクション
@@ -178,4 +180,34 @@ void HelloWorld::myFunction2(std::string filename)
 	this->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
 
 	audioID = experimental::AudioEngine::play2d("test.mp3");
+}
+
+// 自作関数
+void HelloWorld::myFunction3(int count)
+{
+	///
+	/// 本当にやりたいこと
+	///
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+
+	Sprite* spr = Sprite::create("HelloWorld.png");
+	this->addChild(spr);
+	this->setPosition(Vec2(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+
+	audioID = experimental::AudioEngine::play2d("test.mp3");
+
+	///
+	/// 同じ関数を指定時間後に予約する
+	///
+	if (count > 1)
+	{
+		CallFunc* callFunc = CallFunc::create(
+			CC_CALLBACK_0(HelloWorld::myFunction3, this, count - 1));
+		// 指定秒待機するアクション
+		DelayTime* delay = DelayTime::create(1.0f);
+		// 連続アクション
+		Sequence* seq = Sequence::create(delay, callFunc, nullptr);
+
+		this->runAction(seq);
+	}
 }

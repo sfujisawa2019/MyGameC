@@ -40,6 +40,8 @@ public:
 	void myFunction();
 	// 自作関数
 	void myFunction2(std::string filename);
+	// 自作関数
+	void myFunction3(int count);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
@@ -49,7 +51,7 @@ public:
 
 	int audioID;
 
-	int counter = 120;
+	//int counter = 120;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
