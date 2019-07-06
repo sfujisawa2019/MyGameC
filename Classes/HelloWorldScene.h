@@ -42,23 +42,9 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
-	// Sprite配列
-	//cocos2d::Sprite* sprite[100];
+	int audioID;
 
-	//cocos2d::Sprite* sprite;
-	//cocos2d::Sprite* sprite2;
-
-	//// 実行からのカウント
-	//int counter;
-	//// どちらに移動中なのか 0:左 1:下 2:右 3:上
-	//int state;
-
-	//float rot;
-
-	//float blue;
-
-	//// 不透明度
-	//float opacity;
+	int counter = 120;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
