@@ -54,27 +54,6 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 
-	// 関数呼び出しアクション
-	//CallFunc* callFunc = CallFunc::create(
-	//	CC_CALLBACK_0(HelloWorld::myFunction, this));
-	//CallFunc* callFunc = CallFunc::create(
-	//	CC_CALLBACK_0(HelloWorld::myFunction2, this, "HelloWorld.png"));
-	CallFunc* callFunc = CallFunc::create(
-		CC_CALLBACK_0(HelloWorld::myFunction3, this, 5));
-	// 指定秒待機するアクション
-	DelayTime* delay = DelayTime::create(1.0f);
-	// 連続アクション
-	Sequence* seq = Sequence::create(delay, callFunc, nullptr);
-
-	this->runAction(seq);
-	//myFunction();
-
-	audioID = experimental::AudioEngine::play2d("testbgm.mp3", true, 0.5f);
-
-	// updateを有効化する
-	this->scheduleUpdate();
-
-
 
     return true;
 }
@@ -162,4 +141,28 @@ void HelloWorld::myFunction3(int count)
 
 		this->runAction(seq);
 	}
+}
+
+// タッチした瞬間に呼ばれる関数
+bool HelloWorld::onTouchBegan(Touch* touch, Event* unused_event)
+{
+	return true;
+}
+
+// タッチを動かした時に呼ばれる関数
+void HelloWorld::onTouchMoved(Touch* touch, Event* unused_event)
+{
+
+}
+
+// タッチ終了時に呼ばれる関数
+void HelloWorld::onTouchEnded(Touch* touch, Event* unused_event)
+{
+
+}
+
+// タッチがキャンセルされた時に呼ばれる関数
+void HelloWorld::onTouchCancelled(Touch* touch, Event* unused_event)
+{
+
 }

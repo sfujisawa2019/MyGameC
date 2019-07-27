@@ -45,11 +45,18 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
+
+	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+	void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+	void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+	void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
 	int audioID;
+
+
 
 	//int counter = 120;
 };
