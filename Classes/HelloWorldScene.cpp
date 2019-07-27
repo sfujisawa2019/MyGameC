@@ -177,14 +177,14 @@ void HelloWorld::onTouchMoved(Touch* touch, Event* unused_event)
 	// タッチ座標にスプライトを移動
 	spr->setPosition(touch_pos);
 
-	//// スプライトの消滅
-	//spr->removeFromParent();
+	
 }
 
 // タッチ終了時に呼ばれる関数
 void HelloWorld::onTouchEnded(Touch* touch, Event* unused_event)
 {
-	
+	// スプライトの消滅
+	spr->removeFromParent();
 
 	
 }
