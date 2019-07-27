@@ -154,6 +154,14 @@ void HelloWorld::myFunction3(int count)
 // タッチした瞬間に呼ばれる関数
 bool HelloWorld::onTouchBegan(Touch* touch, Event* unused_event)
 {
+	Vec2 touch_pos = touch->getLocation();
+
+	// スプライトの生成
+	Sprite* spr = Sprite::create("HelloWorld.png");
+	this->addChild(spr);
+	// タッチ座標にスプライトを移動
+	spr->setPosition(touch_pos);
+
 	//Director::getInstance()->end();
 	//                                ファイル名
 	experimental::AudioEngine::play2d("test.mp3");
@@ -164,17 +172,17 @@ bool HelloWorld::onTouchBegan(Touch* touch, Event* unused_event)
 // タッチを動かした時に呼ばれる関数
 void HelloWorld::onTouchMoved(Touch* touch, Event* unused_event)
 {
-
+	
 }
 
 // タッチ終了時に呼ばれる関数
 void HelloWorld::onTouchEnded(Touch* touch, Event* unused_event)
 {
-
+	
 }
 
 // タッチがキャンセルされた時に呼ばれる関数
 void HelloWorld::onTouchCancelled(Touch* touch, Event* unused_event)
 {
-
+	
 }
