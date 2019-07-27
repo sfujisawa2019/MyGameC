@@ -166,6 +166,13 @@ bool HelloWorld::onTouchBegan(Touch* touch, Event* unused_event)
 // タッチを動かした時に呼ばれる関数
 void HelloWorld::onTouchMoved(Touch* touch, Event* unused_event)
 {
+	//// スプライトの消滅
+	//spr->removeFromParent();
+}
+
+// タッチ終了時に呼ばれる関数
+void HelloWorld::onTouchEnded(Touch* touch, Event* unused_event)
+{
 	Vec2 touch_pos = touch->getLocation();
 
 	// スプライトの生成
@@ -173,12 +180,6 @@ void HelloWorld::onTouchMoved(Touch* touch, Event* unused_event)
 	this->addChild(spr);
 	// タッチ座標にスプライトを移動
 	spr->setPosition(touch_pos);
-}
-
-// タッチ終了時に呼ばれる関数
-void HelloWorld::onTouchEnded(Touch* touch, Event* unused_event)
-{
-	
 }
 
 // タッチがキャンセルされた時に呼ばれる関数
