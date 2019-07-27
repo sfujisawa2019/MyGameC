@@ -156,11 +156,14 @@ bool HelloWorld::onTouchBegan(Touch* touch, Event* unused_event)
 {
 	Vec2 touch_pos = touch->getLocation();
 
-	// スプライトの生成
-	spr = Sprite::create("CloseNormal.png");
-	this->addChild(spr);
-	// タッチ座標にスプライトを移動
-	spr->setPosition(touch_pos);
+	//// スプライトの生成
+	//spr = Sprite::create("CloseNormal.png");
+	//this->addChild(spr);
+	//// タッチ座標にスプライトを移動
+	//spr->setPosition(touch_pos);
+	m_pStreak = MotionStreak::create(0.5f, 1.0f, 100.0f, Color3B(255, 255, 255), "kirby.png");
+	m_pStreak->setPosition(touch_pos);
+	this->addChild(m_pStreak);
 
 	//Director::getInstance()->end();
 	//                                ファイル名
@@ -174,8 +177,10 @@ void HelloWorld::onTouchMoved(Touch* touch, Event* unused_event)
 {
 	Vec2 touch_pos = touch->getLocation();
 
+	m_pStreak->setPosition(touch_pos);
+
 	// タッチ座標にスプライトを移動
-	spr->setPosition(touch_pos);
+	//spr->setPosition(touch_pos);
 
 	
 }
@@ -183,8 +188,9 @@ void HelloWorld::onTouchMoved(Touch* touch, Event* unused_event)
 // タッチ終了時に呼ばれる関数
 void HelloWorld::onTouchEnded(Touch* touch, Event* unused_event)
 {
+	m_pStreak->removeFromParent();
 	// スプライトの消滅
-	spr->removeFromParent();
+	//spr->removeFromParent();
 
 	
 }

@@ -56,7 +56,8 @@ public:
 
 	int audioID;
 
-	cocos2d::Sprite* spr;
+	//cocos2d::Sprite* spr;
+	cocos2d::MotionStreak* m_pStreak;
 
 	//int counter = 120;
 };
