@@ -53,7 +53,15 @@ bool HelloWorld::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-
+	// イベントリスナーを作成する
+	EventListenerTouchOneByOne* listener = EventListenerTouchOneByOne::create();
+	// イベントリスナーに関数を登録
+	listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
+	listener->onTouchMoved = CC_CALLBACK_2(HelloWorld::onTouchMoved, this);
+	listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
+	listener->onTouchCancelled = CC_CALLBACK_2(HelloWorld::onTouchCancelled, this);
+	// イベントリスナーをシステムに登録
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
     return true;
 }
@@ -146,6 +154,10 @@ void HelloWorld::myFunction3(int count)
 // タッチした瞬間に呼ばれる関数
 bool HelloWorld::onTouchBegan(Touch* touch, Event* unused_event)
 {
+	//Director::getInstance()->end();
+	//                                ファイル名
+	experimental::AudioEngine::play2d("test.mp3");
+
 	return true;
 }
 
